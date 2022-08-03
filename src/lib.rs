@@ -106,6 +106,31 @@ pub struct EdtrSpoiler {
     pub content: Box<EdtrPlugin>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum EdtrBoxType {
+    Blank,
+    Example,
+    Quote,
+    Approach,
+    Remember,
+    Attention,
+    Note,
+    Definition,
+    Theorem,
+    Proof,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct EdtrBox {
+    #[serde(rename = "type")]
+    pub box_type: EdtrBoxType,
+    pub title: Box<EdtrPlugin>,
+    pub anchor_id: String,
+    pub content: Box<EdtrPlugin>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, From)]
 #[serde(tag = "plugin", content = "state")]
 #[serde(rename_all = "camelCase")]
@@ -120,6 +145,7 @@ pub enum EdtrPlugin {
     Multimedia(EdtrMultimedia),
     Spoiler(EdtrSpoiler),
     Injection(PathBuf),
+    Box(EdtrBox),
 }
 
 impl From<String> for EdtrText {
