@@ -1,4 +1,6 @@
+use derive_more::From;
 use serde_derive::{Deserialize, Serialize};
+use std::path::PathBuf;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct EdtrArticleReference {
@@ -104,7 +106,7 @@ pub struct EdtrSpoiler {
     pub content: Box<EdtrPlugin>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, From)]
 #[serde(tag = "plugin", content = "state")]
 #[serde(rename_all = "camelCase")]
 pub enum EdtrPlugin {
@@ -117,7 +119,7 @@ pub enum EdtrPlugin {
     Table(String),
     Multimedia(EdtrMultimedia),
     Spoiler(EdtrSpoiler),
-    Injection(String),
+    Injection(PathBuf),
 }
 
 impl From<String> for EdtrText {
