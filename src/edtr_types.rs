@@ -41,8 +41,15 @@ pub struct EdtrArticleIntroduction {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
+#[serde(deny_unknown_fields)]
 pub enum EdtrText {
-    SimpleText { text: String },
+    SimpleText {
+        text: String,
+        #[serde(default)]
+        strong: bool,
+        #[serde(default)]
+        em: bool,
+    },
     NestedText(EdtrMarkupText),
     Empty {},
 }
@@ -66,6 +73,12 @@ pub enum EdtrMarkupText {
     #[serde(rename = "h")]
     Heading {
         level: usize,
+        children: Vec<EdtrText>,
+    },
+    #[serde(rename = "math")]
+    Math {
+        src: String,
+        inline: bool,
         children: Vec<EdtrText>,
     },
 }
