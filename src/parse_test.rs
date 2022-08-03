@@ -1,7 +1,6 @@
 use serde_json;
 use std::fs::File;
 use std::io::BufReader;
-mod edtr_types;
 
 fn main() -> std::io::Result<()> {
     let input_file = BufReader::new(File::open("1555.json")?);
