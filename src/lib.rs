@@ -119,3 +119,13 @@ pub enum EdtrPlugin {
     Spoiler(EdtrSpoiler),
     Injection(String),
 }
+
+impl From<String> for EdtrText {
+    fn from(flat_str: String) -> Self {
+        EdtrText::SimpleText {
+            text: flat_str,
+            strong: false,
+            em: false,
+        }
+    }
+}
