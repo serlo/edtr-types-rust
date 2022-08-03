@@ -68,6 +68,8 @@ pub enum EdtrMarkupText {
     },
     #[serde(rename = "unordered-list")]
     UnorderedList { children: Vec<EdtrText> },
+    #[serde(rename = "ordered-list")]
+    OrderedList { children: Vec<EdtrText> },
     #[serde(rename = "list-item")]
     ListItem { children: Vec<EdtrText> },
     #[serde(rename = "list-item-child")]
