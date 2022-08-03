@@ -22,3 +22,4 @@ serde_derive = "1.0"
 #mwparser_utils = { git = "https://github.com/serlo/mediawiki-parser-utils" }
 #mfnf_template_spec = { git = "https://github.com/serlo/mfnf-template-spec" }
 clap_derive = "3.2"
+derive_more = "0.99" 
