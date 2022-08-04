@@ -41,16 +41,22 @@ pub struct EdtrArticleIntroduction {
     pub width: usize,
 }
 
+fn is_default<T: Default + PartialEq>(t: &T) -> bool {
+    t == &T::default()
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 #[serde(deny_unknown_fields)]
 pub enum EdtrText {
     SimpleText {
         text: String,
-        #[serde(default)]
+        #[serde(default, skip_serializing_if = "is_default")]
         strong: bool,
-        #[serde(default)]
+        #[serde(default, skip_serializing_if = "is_default")]
         em: bool,
+        #[serde(default, skip_serializing_if = "is_default")]
+        code: bool,
     },
     NestedText(EdtrMarkupText),
     Empty {},
@@ -156,6 +162,7 @@ impl From<String> for EdtrText {
             text: flat_str,
             strong: false,
             em: false,
+            code: false,
         }
     }
 }
