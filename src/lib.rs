@@ -57,6 +57,8 @@ pub enum EdtrText {
         em: bool,
         #[serde(default, skip_serializing_if = "is_default")]
         code: bool,
+        #[serde(default, skip_serializing_if = "is_default")]
+        color: usize,
     },
     NestedText(EdtrMarkupText),
     Empty {},
@@ -163,6 +165,7 @@ impl From<String> for EdtrText {
             strong: false,
             em: false,
             code: false,
+            color: 0,
         }
     }
 }
